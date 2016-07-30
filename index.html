@@ -21,7 +21,7 @@
         background-color: #fff;
         padding: 5px;
         border: 1px solid #999;
-        text-align: center;
+        text-align: left;
         font-family: 'Roboto','sans-serif';
         line-height: 30px;
         padding-left: 10px;
@@ -44,7 +44,8 @@
       <option value="BICYCLING">Bicycling</option>
       <option value="TRANSIT">Transit</option>
     </select>  
-
+    <br/>
+    <input type="checkbox" id="roadworks" value="Yes" checked> show road works
     </div>
     <div id="map"></div>
     <script>
@@ -64,6 +65,15 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         if (document.getElementById('end').value == "2") {
           end = {lat: -43.540924 , lng: 172.6397697};
         } 
+      if (document.getElementById('roadworks').checked) {      
+        map.data.loadGeoJson('http://localhost/d.geojson');
+        //map.data.loadGeoJson('http://api.tmpforchch.co.nz/v3/tmps?key=govhack2016&format=geojson&limit=10000');
+      } else {
+        map.data.forEach(function (feature) {
+          map.data.remove(feature);
+        });
+      }
+   
         directionsService.route({
           origin: {lat: -43.533885, lng: 172.625475},
           destination: end,
@@ -93,7 +103,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         };
 
        document.getElementById('end').addEventListener('change', onChangeHandler);
-   document.getElementById('mode').addEventListener('change', onChangeHandler);
+      document.getElementById('mode').addEventListener('change', onChangeHandler);
+       document.getElementById('roadworks').addEventListener('change', onChangeHandler);
  
       var chcontentString = '<div id="content">'+
       '<div id="siteNotice">'+
@@ -148,8 +159,10 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       trafficLayer.setMap(map);
 
             // NOTE: This uses cross-domain XHR, and may not work on older browsers.
-      //map.data.loadGeoJson('http://localhost/d.geojson');
-      //map.data.loadGeoJson('http://api.tmpforchch.co.nz/v3/tmps?key=govhack2016&format=geojson&limit=10000');
+      if (document.getElementById('roadworks').checked) {      
+        map.data.loadGeoJson('http://localhost/d.geojson');
+        //map.data.loadGeoJson('http://api.tmpforchch.co.nz/v3/tmps?key=govhack2016&format=geojson&limit=10000');
+      }
       var image = 'http://localhost/medical.png';
       
 
