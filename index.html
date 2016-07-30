@@ -45,18 +45,13 @@
       <option value="TRANSIT">Transit</option>
     </select>  
     <br/>
-    <input type="checkbox" id="roadworks" value="Yes" checked> show road works
+    <input type="checkbox" id="roadworks" value="Yes" checked> show road works <br/>
+    <p id="tt"> travel time: </p>
+
     </div>
     <div id="map"></div>
     <script>
 
-
-
-
-    /*  var chLatLng = new google.maps.LatLng(-43.533885,172.625475);
-     var b24LatLng = new google.maps.LatLng( -43.520937 , 172.636585); 
-     var mhLatLng = new google.maps.LatLng( -43.540924 , 172.6397697);
-*/
        var map;
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
@@ -84,6 +79,8 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
           } else {
             window.alert('Directions request failed due to ' + status);
           }
+          document.getElementById('tt').innerHTML = "travel time: " + directionsDisplay.directions.routes[0].legs[0].duration.text;
+
         });
       }
  
@@ -111,7 +108,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       '</div>'+
       '<h1 id="firstHeading" class="firstHeading">Christchurch Hospital</h1>'+
       '<div id="bodyContent">'+
-      '<p><b>Current wait time:</b>  05:30' +
+      '<p style="color:red"><b style="color:black">Current wait time:</b> 05:30' +
       '</p>'+
       '<i style="font-size: 8px">Icon Designed by Freepik and distributed by Flaticon</i>'
       '</div>'+
@@ -123,7 +120,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
       '<h1 id="firstHeading" class="firstHeading">24 Hour Surgery</h1>'+
       '<div id="bodyContent">'+
       '<p>Bealy Ave</p>' +
-      '<p><b>Current wait time:</b>  00:45' +
+      '<p><b>Current wait time:</b>  01:45' +
       '</p>'+
       '<i style="font-size: 8px">Icon Designed by Freepik and distributed by Flaticon</i>'
       '</div>'+
@@ -212,10 +209,6 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
      infowindow.open(map, marker);
             
 }
-
-  
-
-
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKBBdpg6lzLOS6Mw-HVOXAbG2SceGhWgU&callback=initMap"
     async defer></script>
