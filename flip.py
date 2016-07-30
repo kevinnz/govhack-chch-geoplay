@@ -1,5 +1,13 @@
 #!/usr/bin/python
 #
+# a quick hack script to flip x and y coordinates for the URL
+# http://api.tmpforchch.co.nz/v4/tmps?key=govhack2016&format=geojson&limit=10000
+#
+# found out later that it wasn't need if used URL
+# http://api.tmpforchch.co.nz/v3/tmps?key=govhack2016&format=geojson&limit=10000
+#
+
+
 import json
 
 with open('c.geojson', 'r') as myfile:
