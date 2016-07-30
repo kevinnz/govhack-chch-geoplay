@@ -36,7 +36,14 @@
       <option value="1">24 Surgery</option>
       <option value="2">Moorhouse Medical</option>
     </select>
-  
+<br/>
+    <b>Mode of Travel: </b>
+    <select id="mode">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>  
 
     </div>
     <div id="map"></div>
@@ -52,6 +59,7 @@
        var map;
 
 function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+        var selectedMode = document.getElementById('mode').value;
         var end = {lat: -43.520937 , lng: 172.636585};
         if (document.getElementById('end').value == "2") {
           end = {lat: -43.540924 , lng: 172.6397697};
@@ -59,7 +67,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         directionsService.route({
           origin: {lat: -43.533885, lng: 172.625475},
           destination: end,
-          travelMode: 'DRIVING'
+          travelMode: google.maps.TravelMode[selectedMode]
         }, function(response, status) {
           if (status === 'OK') {
             directionsDisplay.setDirections(response);
@@ -85,7 +93,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         };
 
        document.getElementById('end').addEventListener('change', onChangeHandler);
- 
+   document.getElementById('mode').addEventListener('change', onChangeHandler);
  
       var chcontentString = '<div id="content">'+
       '<div id="siteNotice">'+
