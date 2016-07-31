@@ -100,7 +100,7 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         };
 
        document.getElementById('end').addEventListener('change', onChangeHandler);
-      document.getElementById('mode').addEventListener('change', onChangeHandler);
+       document.getElementById('mode').addEventListener('change', onChangeHandler);
        document.getElementById('roadworks').addEventListener('change', onChangeHandler);
  
       var chcontentString = '<div id="content">'+
@@ -160,31 +160,35 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
         map.data.loadGeoJson('http://localhost/d.geojson');
         //map.data.loadGeoJson('http://api.tmpforchch.co.nz/v3/tmps?key=govhack2016&format=geojson&limit=10000');
       }
-      var image = 'http://localhost/medical.png';
       
 
       var marker = new google.maps.Marker({
         position: {lat: -43.533885, lng: 172.625475},
         map: map,
         title: 'Christchurch Hospital',
-        icon: image
+        icon: {
+            size: new google.maps.Size(20, 20),
+            scaledSize: new google.maps.Size(20, 20),
+            url: "medical.png"
+          }
       });
 
-//marker.setMap(map);
 
       marker.addListener('click', function() {
           infowindow.open(map, marker);
         });
-      var imageM = 'http://localhost/medical-1.png';
-
+     
       var marker24 = new google.maps.Marker({
           position: {lat: -43.520937 , lng: 172.636585},
           map: map,
           title: '24 Hour Surgery',
-          icon: imageM
+          icon: {
+            size: new google.maps.Size(20, 20),
+            scaledSize: new google.maps.Size(20, 20),
+            url: "medical-1.png"
+          }
         });
 
-//marker.setMap(map);
 
         marker24.addListener('click', function() {
             infowindow24.open(map, marker24);
@@ -195,11 +199,14 @@ function calculateAndDisplayRoute(directionsService, directionsDisplay) {
           position: {lat: -43.540924 , lng: 172.6397697},
           map: map,
           title: 'Moorhouse Medical',
-          icon: imageM
+          icon: {
+            size: new google.maps.Size(20, 20),
+            scaledSize: new google.maps.Size(20, 20),
+            url: "medical-1.png"
+          }
 
         });
 
-//marker.setMap(map);
 
         markerMH.addListener('click', function() {
             infowindowMH.open(map, markerMH);
